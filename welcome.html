@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>Travel Agency - Wanderlust Travels</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Default Styles */
+        body {
+            background-image: url('https://webmanager.raksotravel.com/Images/upload/banners/HOME_bg_banner_lg.jpg'); /* Custom Background Image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .hero p {
+    font-weight: 400; /* Use appropriate font weight (20 is not valid) */
+    font-family:cursive; /* Use a clean, modern font */
+    font-size: 40px; /* Adjust the font size */
+    line-height: 1.6;
+    color: #626a0b; /* Adjust the color to your preference */
+    text-align: center;
+}
+        body.dark-mode {
+            background-color: #0f1651;
+            background-image: none;
+            color: #fff;
+        }
+        body.light-mode {
+            background-color: #ffffff;
+            background-image: none;
+            color: #000;
+        }
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+        }
+        /* Dark mode navbar styling */
+body.dark-mode .navbar {
+    background-color: white;  /* White background in dark mode */
+}
+
+body.dark-mode .navbar-nav .nav-link {
+    color: black;  /* Dark text color in dark mode */
+}
+
+/* Ensure that the icons in navbar stay dark in dark mode */
+body.dark-mode .social-icon {
+    color: black;
+}
+
+        
+        .hero.light-mode a {
+            color: #000;
+        }
+
+        .btn-discover {
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .social-icon {
+            font-size: 1.9rem;
+        }
+     
+
+        .nav-link {
+            font-size: 1.2rem;
+            color: white !important;
+        }
+
+        body.nav-link.light-mode {
+            color: black !important;}
+
+        .nav-link.dark-mode {
+            color: rgb(236, 227, 227) !important;
+        }
+
+        /* Modal Styles */
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050;
+        }
+
+        #popup-content {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #popup-content input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #popup-content button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #popup-content button:hover {
+            background-color: #b3b01b;
+        }
+
+        #hero-description {
+            color:#24407c;
+            font-size: 30px;
+            font-family:poppins;
+            text-align: center;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="popup">
+        <div id="popup-content">
+            <h5>Enter your information</h5>
+            <input type="text" id="username" placeholder="Enter your name">
+            <input type="password" id="password" placeholder="Enter password">
+            <div>
+                <button class="accept-btn" onclick="verifyCredentials()">Accept</button>
+                <button class="cancel-btn" onclick="cancelLogin()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: rgb(3, 53, 53);">
+        <a class="navbar-brand font-weight-bold text-warning" href="welcome.html">Wanderlust Travels</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link text-primary" href="homePage.html" id="nav-home">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-primary" href="aboutus.html" id="nav-about">About Us</a></li>
+                <li class="nav-item"><a class="nav-link text-primary" href="creat.html" id="nav-create">Create</a></li>
+            </ul>
+
+              <!-- Search Input -->
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for a country" aria-label="Search" style="width: 200px;">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav d-flex align-items-center">
+            <li class="nav-item">
+                <a href="https://www.facebook.com/groups/19413527304/" class="nav-link text-light mx-3 social-icon">
+                    <i class="bi bi-facebook text-primary" style="font-size: 1.5rem; padding: 0.5rem 1rem; transition: color 0.3s;" onmouseover="this.classList.add('text-dark')" onmouseout="this.classList.remove('text-dark')"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://web.whatsapp.com/" class="nav-link text-light mx-3 social-icon">
+                    <i class="bi bi-whatsapp text-success" style="font-size: 1.5rem; padding: 0.3rem 1rem; transition: color 0.3s;" onmouseover="this.classList.add('text-dark')" onmouseout="this.classList.remove('text-dark')"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="https://www.instagram.com/thesmartflyer/?hl=en" class="nav-link text-light mx-3 social-icon">
+                    <i class="bi bi-instagram text-danger" style="font-size: 1.5rem; padding: 0.5rem 1rem; transition: color 0.3s;" onmouseover="this.classList.add('text-dark')" onmouseout="this.classList.remove('text-dark')"></i>
+                       
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-light mx-3 social-icon" id="theme-toggle">
+                    <i class="bi bi-moon-stars-fill" id="theme-icon"></i>
+                    </a>
+                </li>
+                <!-- Translation Toggle -->
+                <li class="nav-item">
+                 <a href="#" class="nav-link text-light mx-3" id="translate-toggle">
+              <i class="bi bi-translate"></i> <!-- Translation Icon -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <p class="display-4 font-weight-bold" id="hero-title" style="opacity: 0;">Welcome to Your Next Journey!
+                Step into a world of endless travel possibilities. We bring you closer to the experiences you've always dreamed of.Let us guide you to unforgettable memories and the adventure of a lifetime!</p>
+            <a href="homePage.html" class="btn btn-discover btn-primary" id="hero-button" style="opacity: 0;">Let's start</a>
+        </div>
+    </div>
+    <ul class="navbar-nav d-flex align-items-center">
+        <!-- Other social icons -->  
+    </ul>
+    <script>
+        // Function to handle login verification
+        function verifyCredentials() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            // Simple validation example (replace with real logic or API call)
+            if (username === 'alaa' && password === '1234') {
+                alert('Login successful!,welcome Alaa');
+                document.getElementById('popup').style.display = 'none'; // Hide the popup
+            } else {
+                alert('Invalid information. try again.');
+            }
+        }
+        // Optional: Allow pressing "Enter" to log in
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                verifyCredentials();
+            }
+        });
+        // Cancel login attempt
+function cancelLogin() {
+    document.getElementById('popup').style.display = 'none'; }// Close the popup
+  // Dark and Light Mode Toggle
+const themeToggle = document.querySelector('#theme-toggle');
+const themeIcon = document.querySelector('#theme-icon');
+themeToggle.addEventListener('click', function () {
+    if (document.body.classList.contains('dark-mode')) {
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+        themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+    } else {
+        document.body.classList.remove('light-mode');
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.replace('bi-sun-fill', 'bi-moon-stars-fill');
+    }
+});
+// Translation Toggle
+const translateToggle = document.querySelector('#translate-toggle');
+
+translateToggle.addEventListener('click', function () {
+    const isArabic = document.body.classList.contains('rtl'); // Check if RTL is already applied
+
+    // Toggle the RTL class to switch text direction
+    document.body.classList.toggle('rtl'); 
+
+    // Update the text in hero and navbar based on the language (Arabic or English)
+    if (isArabic) {
+        // Switch back to English
+        document.getElementById('hero-title').innerText = "Welcome to Your Next Journey! Step into a world of endless travel possibilities. We bring you closer to the experiences you’ve always dreamed of. Let us guide you to unforgettable memories and the adventure of a lifetime!";
+        
+        document.getElementById('hero-button').innerText = "Discover Your Dream Journey";
+
+        // Navbar translation back to English
+        document.getElementById('nav-home').innerText = "Home";
+        document.getElementById('nav-about').innerText = "About Us";
+        document.getElementById('nav-create').innerText = "Create";
+    } else {
+        // Switch to Arabic
+        document.getElementById('hero-title').innerText = "مرحبًا بك في رحلتك القادمة! انطلق إلى عالم من إمكانيات السفر التي لا حصر لها. نحن نقربك من التجارب التي طالما حلمت بها. دعنا نرشدك إلى ذكريات لا تُنسى ومغامرة العمر!";
+       
+        document.getElementById('hero-button').innerText = "اكتشف رحلتك الحلم";
+
+        // Navbar translation to Arabic
+        document.getElementById('nav-home').innerText = "الرئيسية";
+        document.getElementById('nav-about').innerText = "معلومات عنا";
+        document.getElementById('nav-create').innerText = "إنشاء";
+    }
+});
+$(document).ready(function () {
+        // Animate the hero text
+        $('#hero-title').animate({ opacity: 1 }, 8000); // Fade in text over 2 seconds
+
+        // Delay for the button animation
+        $('#hero-button').delay(1000).animate({ opacity: 1 }, 1000); // Fade in the button after 1 second delay
+    });
+
+ 
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
